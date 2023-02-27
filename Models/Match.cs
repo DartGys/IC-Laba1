@@ -17,8 +17,6 @@ public partial class Match
 
     public int GuestClubId { get; set; }
 
-    public int ChampionshipId { get; set; }
-
     public virtual Club GuestClub { get; set; } = null!;
 
     public virtual Club HostClub { get; set; } = null!;

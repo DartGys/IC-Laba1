@@ -12,4 +12,6 @@ public partial class Championship
     public string ChampionshipName { get; set; } = null!;
 
     public int ChampionshipClubQuantity { get; set; }
+    public int MatchId { get; set; }
+    public virtual Match Match { get; set; } = null!;    
 }
