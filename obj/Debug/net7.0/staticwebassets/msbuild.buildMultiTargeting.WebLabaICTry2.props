@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\WebLabaICTry2.props" />
+</Project>
