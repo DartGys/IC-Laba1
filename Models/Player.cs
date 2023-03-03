@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebLabaICTry2.Models;
+namespace FootBallWebLaba1.Models;
 
 public partial class Player
 {
     public int PlayerId { get; set; }
 
-    public string PlayerName { get; set; } = null!;
+    public string PlayerName { get; set; }
 
     public int PlayerNumber { get; set; }
 
-    public string PlayerPosition { get; set; } = null!;
+    public string PlayerPosition { get; set; }
 
     public decimal PlayerSalary { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Player
 
     public int ClubId { get; set; }
 
-    public virtual Club PlayerNavigation { get; set; } = null!;
+    public virtual Club PlayerNavigation { get; set; }
 }

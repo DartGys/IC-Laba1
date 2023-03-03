@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebLabaICTry2.Models;
+namespace FootBallWebLaba1.Models;
 
 public partial class Stadium
 {
     public int StadiumId { get; set; }
 
-    public string StadiumLocation { get; set; } = null!;
+    public string StadiumLocation { get; set; }
 
     public int StadiumCapacity { get; set; }
 
@@ -15,7 +15,7 @@ public partial class Stadium
 
     public int ClubId { get; set; }
 
-    public virtual Club Club { get; set; } = null!;
+    public virtual Club Club { get; set; }
 
     public virtual ICollection<Match> Matches { get; } = new List<Match>();
 }

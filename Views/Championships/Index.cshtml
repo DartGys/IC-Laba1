@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FootBallWebLaba1.Models.Championship>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ChampionshipCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChampionshipName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChampionshipClubQuantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChampionshipCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChampionshipName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChampionshipClubQuantity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ChampionshipId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ChampionshipId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ChampionshipId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebLabaICTry2.Models;
+namespace FootBallWebLaba1.Models;
 
 public partial class Club
 {
     public int ClubId { get; set; }
 
-    public string ClubName { get; set; } = null!;
+    public string ClubName { get; set; }
 
-    public string ClubOrigin { get; set; } = null!;
+    public string ClubOrigin { get; set; }
 
     public int ClubPlayerQuantity { get; set; }
 
-    public string ClubCoachName { get; set; } = null!;
+    public string ClubCoachName { get; set; }
 
     public DateTime ClubEstablishmentDate { get; set; }
 
@@ -21,7 +21,7 @@ public partial class Club
 
     public virtual ICollection<Match> MatchHostClubs { get; } = new List<Match>();
 
-    public virtual Player? Player { get; set; }
+    public virtual Player Player { get; set; }
 
-    public virtual ICollection<Stadium> Stadia { get; } = new List<Stadium>();
+    public virtual ICollection<Stadium> Stadium { get; } = new List<Stadium>();
 }

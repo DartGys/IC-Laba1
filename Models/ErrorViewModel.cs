@@ -1,4 +1,4 @@
-namespace WebLabaICTry2.Models
+namespace FootBallWebLaba1.Models
 {
     public class ErrorViewModel
     {

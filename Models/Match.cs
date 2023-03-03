@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebLabaICTry2.Models;
+namespace FootBallWebLaba1.Models;
 
 public partial class Match
 {
@@ -17,9 +17,13 @@ public partial class Match
 
     public int GuestClubId { get; set; }
 
-    public virtual Club GuestClub { get; set; } = null!;
+    public int ChampionshipId { get; set; }
 
-    public virtual Club HostClub { get; set; } = null!;
+    public virtual Championship Championship { get; set; }
 
-    public virtual Stadium Staidum { get; set; } = null!;
+    public virtual Club GuestClub { get; set; }
+
+    public virtual Club HostClub { get; set; }
+
+    public virtual Stadium Stadium { get; set; }
 }

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FootBallWebLaba1.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WebLabaICTry2.Models;
 
-namespace WebLabaICTry2.Controllers
+namespace FootBallWebLaba1.Controllers
 {
     public class HomeController : Controller
     {

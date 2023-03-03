@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebLabaICTry2.Models;
+namespace FootBallWebLaba1.Models;
 
 public partial class FootBallBdContext : DbContext
 {
@@ -29,7 +29,7 @@ public partial class FootBallBdContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-CFOLTDF\\SQLEXPRESS; Database=FootBallBD; Trusted_Connection=True; TrustServerCertificate = true ");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-CFOLTDF\\SQLEXPRESS; Database=FootBallBD; Trusted_Connection=True; TrustServerCertificate = true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,18 +37,28 @@ public partial class FootBallBdContext : DbContext
         {
             entity.ToTable("Championship");
 
-            entity.Property(e => e.ChampionshipCountry).HasMaxLength(50);
-            entity.Property(e => e.ChampionshipName).HasMaxLength(50);
+            entity.Property(e => e.ChampionshipCountry)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.ChampionshipName)
+                .IsRequired()
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<Club>(entity =>
         {
             entity.ToTable("Club");
 
-            entity.Property(e => e.ClubCoachName).HasMaxLength(50);
+            entity.Property(e => e.ClubCoachName)
+                .IsRequired()
+                .HasMaxLength(50);
             entity.Property(e => e.ClubEstablishmentDate).HasColumnType("date");
-            entity.Property(e => e.ClubName).HasMaxLength(50);
-            entity.Property(e => e.ClubOrigin).HasMaxLength(50);
+            entity.Property(e => e.ClubName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.ClubOrigin)
+                .IsRequired()
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<Match>(entity =>
@@ -56,6 +66,11 @@ public partial class FootBallBdContext : DbContext
             entity.ToTable("Match");
 
             entity.Property(e => e.MatchDate).HasColumnType("date");
+
+            entity.HasOne(d => d.Championship).WithMany(p => p.Matches)
+                .HasForeignKey(d => d.ChampionshipId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Match_Championship");
 
             entity.HasOne(d => d.GuestClub).WithMany(p => p.MatchGuestClubs)
                 .HasForeignKey(d => d.GuestClubId)
@@ -67,7 +82,7 @@ public partial class FootBallBdContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Match_HostClub");
 
-            entity.HasOne(d => d.Staidum).WithMany(p => p.Matches)
+            entity.HasOne(d => d.Stadium).WithMany(p => p.Matches)
                 .HasForeignKey(d => d.StaidumId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Match_Stadium");
@@ -79,8 +94,12 @@ public partial class FootBallBdContext : DbContext
 
             entity.Property(e => e.PlayerId).ValueGeneratedOnAdd();
             entity.Property(e => e.PlayerBirthDate).HasColumnType("date");
-            entity.Property(e => e.PlayerName).HasMaxLength(40);
-            entity.Property(e => e.PlayerPosition).HasMaxLength(20);
+            entity.Property(e => e.PlayerName)
+                .IsRequired()
+                .HasMaxLength(40);
+            entity.Property(e => e.PlayerPosition)
+                .IsRequired()
+                .HasMaxLength(20);
             entity.Property(e => e.PlayerSalary).HasColumnType("money");
 
             entity.HasOne(d => d.PlayerNavigation).WithOne(p => p.Player)
@@ -111,9 +130,11 @@ public partial class FootBallBdContext : DbContext
             entity.ToTable("Stadium");
 
             entity.Property(e => e.StadiumEstablismentDate).HasColumnType("date");
-            entity.Property(e => e.StadiumLocation).HasMaxLength(50);
+            entity.Property(e => e.StadiumLocation)
+                .IsRequired()
+                .HasMaxLength(50);
 
-            entity.HasOne(d => d.Club).WithMany(p => p.Stadia)
+            entity.HasOne(d => d.Club).WithMany(p => p.Stadium)
                 .HasForeignKey(d => d.ClubId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Stadium_Club");

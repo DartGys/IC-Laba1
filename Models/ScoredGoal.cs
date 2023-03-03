@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebLabaICTry2.Models;
+namespace FootBallWebLaba1.Models;
 
 public partial class ScoredGoal
 {
@@ -13,7 +13,7 @@ public partial class ScoredGoal
 
     public int MatchId { get; set; }
 
-    public virtual Match Match { get; set; } = null!;
+    public virtual Match Match { get; set; }
 
-    public virtual Player Player { get; set; } = null!;
+    public virtual Player Player { get; set; }
 }
