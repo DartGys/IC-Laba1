@@ -29,7 +29,7 @@ public partial class FootBallBdContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-CFOLTDF\\SQLEXPRESS; Database=FootBallBD; Trusted_Connection=True; TrustServerCertificate = true");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-CFOLTDF\\SQLEXPRESS;Database=FootBallBD;Trusted_Connection=True;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -92,7 +92,6 @@ public partial class FootBallBdContext : DbContext
         {
             entity.ToTable("Player");
 
-            entity.Property(e => e.PlayerId).ValueGeneratedOnAdd();
             entity.Property(e => e.PlayerBirthDate).HasColumnType("date");
             entity.Property(e => e.PlayerName)
                 .IsRequired()
@@ -102,24 +101,22 @@ public partial class FootBallBdContext : DbContext
                 .HasMaxLength(20);
             entity.Property(e => e.PlayerSalary).HasColumnType("money");
 
-            entity.HasOne(d => d.PlayerNavigation).WithOne(p => p.Player)
-                .HasForeignKey<Player>(d => d.PlayerId)
+            entity.HasOne(d => d.Club).WithMany(p => p.Players)
+                .HasForeignKey(d => d.ClubId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Player_Club");
         });
 
         modelBuilder.Entity<ScoredGoal>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ScoredGoal");
+            entity.ToTable("ScoredGoal");
 
-            entity.HasOne(d => d.Match).WithMany()
+            entity.HasOne(d => d.Match).WithMany(p => p.ScoredGoals)
                 .HasForeignKey(d => d.MatchId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ScoredGoal_Match");
 
-            entity.HasOne(d => d.Player).WithMany()
+            entity.HasOne(d => d.Player).WithMany(p => p.ScoredGoals)
                 .HasForeignKey(d => d.PlayerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ScoredGoal_Player");

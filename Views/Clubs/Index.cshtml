@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FootBallWebLaba1.Models.Club>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubOrigin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubPlayerQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubCoachName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubEstablishmentDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubOrigin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubPlayerQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubCoachName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubEstablishmentDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ClubId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ClubId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ClubId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

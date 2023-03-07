@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\FootBallWebLaba1.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\wwwroot\\css\\bootTheme.css",
+      "PackagePath": "staticwebassets\\css\\bootTheme.css"
+    },
+    {
       "Id": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

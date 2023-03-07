@@ -25,7 +25,7 @@ namespace FootBallWebLaba1.Controllers
 
             ViewBag.ChampionshipId = id;  
             ViewBag.ChampionshipName = name;
-            var matchesByChampionships = _context.Matches.Where(b => b.ChampionshipId == id).Include(b => b.Championship);
+            var matchesByChampionships = _context.Matches.Where(b => b.ChampionshipId == id).Include(b => b.Championship).Include(b => b.HostClub).Include(b => b.GuestClub).Include(b => b.Stadium);
             return View(await matchesByChampionships.ToListAsync());
         }
 
@@ -48,16 +48,16 @@ namespace FootBallWebLaba1.Controllers
                 return NotFound();
             }
 
-            return View(match);
+            return RedirectToAction("Index", "ScoredGoals", new { id = match.MatchId}); ;
         }
 
         // GET: Matches/Create
         public IActionResult Create(int championshipId)
         {
             //ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry");
-            //ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName");
-            //ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName");
-            //ViewData["StaidumId"] = new SelectList(_context.Stadia, "StadiumId", "StadiumLocation");
+            ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName");
+            ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName");
+            ViewData["StaidumId"] = new SelectList(_context.Stadia, "StadiumId", "StadiumLocation");
             ViewBag.ChampionshipId = championshipId;
             ViewBag.ChampionshipName = _context.Championships.Where(c => c.ChampionshipId == championshipId).FirstOrDefault().ChampionshipName;
             return View();

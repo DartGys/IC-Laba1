@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PYc8fZGGrlcgeb8MH0WWE2HK4MLgYqGNfgmGZE+RO1I=",
+  "Hash": "CdMKLlEswnFD5zCFAEykZZCZR2VExUeVh6CW0SISQS0=",
   "Source": "FootBallWebLaba1",
   "BasePath": "_content/FootBallWebLaba1",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\FootBallWebLaba1.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\wwwroot\\css\\bootTheme.css",
+      "SourceId": "FootBallWebLaba1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\wwwroot\\",
+      "BasePath": "_content/FootBallWebLaba1",
+      "RelativePath": "css/bootTheme.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bootTheme.css"
     },
     {
       "Identity": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\wwwroot\\css\\site.css",
