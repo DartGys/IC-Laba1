@@ -4,10 +4,10 @@
     ViewData["Title"] = "Матч за чемпіонатом";
 }
 
-<h1>Матч за чемпіонатом @ViewBag.ChampionshipName</h1>
+<h1>Матч чемпіонату @ViewBag.ChampionshipName</h1>
 
 <p>
-    @Html.ActionLink("Додати новий матч","Create", new {championshipId = ViewBag.ChampionshipId})
+       @Html.ActionLink("Додати новий матч","Create", new {championshipId = ViewBag.ChampionshipId})
 </p>
        
 <table class="table">
@@ -56,9 +56,13 @@
                 @Html.DisplayFor(modelItem => item.Stadium.StadiumLocation)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MatchId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MatchId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MatchId">Delete</a>
+                    <div><a asp-action="Details" asp-route-id="@item.MatchId">Статистика матчу</a> </div>
+                    <div><a asp-controller="Stadiums" asp-action="DetailsStadium" asp-route-id="@item.StaidumId">Стадіон</a></div>
+                    <div><a asp-controller="Clubs" asp-action="Details" asp-route-id="@item.HostClubId">Команда хазяїв</a></div>
+                    <div><a asp-controller="Clubs" asp-action="Details" asp-route-id="@item.GuestClubId">Команда гостей</a></div>
+                        <a asp-action="Edit" asp-route-id="@item.MatchId">Редагувати</a> |
+                        <a asp-action="Delete" asp-route-id="@item.MatchId">Видалити</a>
+                    
             </td>
         </tr>
 }

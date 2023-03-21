@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootBallWebLaba1.Models;
+using System.Numerics;
 
 namespace FootBallWebLaba1.Controllers
 {
-    public class StadiaController : Controller
+    public class StadiumsController : Controller
     {
         private readonly FootBallBdContext _context;
 
-        public StadiaController(FootBallBdContext context)
+        public StadiumsController(FootBallBdContext context)
         {
             _context = context;
         }
@@ -21,19 +22,37 @@ namespace FootBallWebLaba1.Controllers
         // GET: Stadia
         public async Task<IActionResult> Index()
         {
-            var footBallBdContext = _context.Stadia.Include(s => s.Club);
+            var footBallBdContext = _context.Stadiums.Include(s => s.Club);
             return View(await footBallBdContext.ToListAsync());
         }
 
         // GET: Stadia/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Stadia == null)
+            if (id == null || _context.Stadiums == null)
             {
                 return NotFound();
             }
 
-            var stadium = await _context.Stadia
+            var stadium = await _context.Stadiums
+                .Include(s => s.Club)
+                .FirstOrDefaultAsync(m => m.StadiumId == id);
+            if (stadium == null)
+            {
+                return NotFound();
+            }
+            
+            return RedirectToAction("Details", "Clubs", new { id = stadium.ClubId });
+        }
+
+        public async Task<IActionResult> DetailsStadium(int? id)
+        {
+            if (id == null || _context.Stadiums == null)
+            {
+                return NotFound();
+            }
+
+            var stadium = await _context.Stadiums
                 .Include(s => s.Club)
                 .FirstOrDefaultAsync(m => m.StadiumId == id);
             if (stadium == null)
@@ -45,9 +64,10 @@ namespace FootBallWebLaba1.Controllers
         }
 
         // GET: Stadia/Create
-        public IActionResult Create()
+        public IActionResult Create(int clubId)
         {
-            ViewData["ClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName");
+            //ViewData["ClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName");
+            ViewBag.ClubId = clubId;
             return View();
         }
 
@@ -56,27 +76,46 @@ namespace FootBallWebLaba1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StadiumId,StadiumLocation,StadiumCapacity,StadiumEstablismentDate,ClubId")] Stadium stadium)
+        public async Task<IActionResult> Create(int clubId,[Bind("StadiumId,StadiumLocation,StadiumCapacity,StadiumEstablismentDate,ClubId")] Stadium stadium)
         {
+            stadium.ClubId = clubId;
             if (ModelState.IsValid)
             {
+                DateTime curDate = DateTime.Now;
+                DateTime estDate = stadium.StadiumEstablismentDate;
+
+                if(estDate > curDate)
+                {
+                    ViewBag.ClubId = clubId;
+                    ModelState.AddModelError("StadiumEstablismentDate", "Дата заснування не відповідає дійсності");
+                    return View(stadium);
+                }
+
+                var locationStadium = await _context.Stadiums.FirstOrDefaultAsync(l => l.StadiumLocation == stadium.StadiumLocation);
+                if(locationStadium != null)
+                {
+                    ViewBag.ClubId = clubId;
+                    ModelState.AddModelError("StadiumLocation", "Стадіон з такою локацією уже існує");
+                    return View(stadium);
+                }
+
                 _context.Add(stadium);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Clubs");
             }
-            ViewData["ClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", stadium.ClubId);
+            //ViewData["ClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", stadium.ClubId);
             return View(stadium);
         }
 
         // GET: Stadia/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Stadia == null)
+            if (id == null || _context.Stadiums == null)
             {
                 return NotFound();
             }
 
-            var stadium = await _context.Stadia.FindAsync(id);
+            var stadium = await _context.Stadiums.FindAsync(id);
             if (stadium == null)
             {
                 return NotFound();
@@ -99,6 +138,23 @@ namespace FootBallWebLaba1.Controllers
 
             if (ModelState.IsValid)
             {
+
+                DateTime curDate = DateTime.Now;
+                DateTime estDate = stadium.StadiumEstablismentDate;
+
+                if (estDate > curDate)
+                {
+                    ModelState.AddModelError("StadiumEstablismentDate", "Дата заснування не відповідає дійсності");
+                    return View(stadium);
+                }
+
+                var locationStadium = await _context.Stadiums.FirstOrDefaultAsync(l => l.StadiumLocation == stadium.StadiumLocation && l.StadiumId != stadium.StadiumId);
+                if (locationStadium != null)
+                {
+                    ModelState.AddModelError("StadiumLocation", "Стадіон з такою локацією уже існує");
+                    return View(stadium);
+                }
+
                 try
                 {
                     _context.Update(stadium);
@@ -124,12 +180,12 @@ namespace FootBallWebLaba1.Controllers
         // GET: Stadia/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Stadia == null)
+            if (id == null || _context.Stadiums == null)
             {
                 return NotFound();
             }
 
-            var stadium = await _context.Stadia
+            var stadium = await _context.Stadiums
                 .Include(s => s.Club)
                 .FirstOrDefaultAsync(m => m.StadiumId == id);
             if (stadium == null)
@@ -145,14 +201,14 @@ namespace FootBallWebLaba1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Stadia == null)
+            if (_context.Stadiums == null)
             {
-                return Problem("Entity set 'FootBallBdContext.Stadia'  is null.");
+                return Problem("Entity set 'FootBallBdContext.Stadiums'  is null.");
             }
-            var stadium = await _context.Stadia.FindAsync(id);
+            var stadium = await _context.Stadiums.FindAsync(id);
             if (stadium != null)
             {
-                _context.Stadia.Remove(stadium);
+                _context.Stadiums.Remove(stadium);
             }
             
             await _context.SaveChangesAsync();
@@ -161,7 +217,7 @@ namespace FootBallWebLaba1.Controllers
 
         private bool StadiumExists(int id)
         {
-          return _context.Stadia.Any(e => e.StadiumId == id);
+          return _context.Stadiums.Any(e => e.StadiumId == id);
         }
     }
 }

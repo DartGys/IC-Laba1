@@ -9,13 +9,13 @@ public partial class Club
     public int ClubId { get; set; }
     [Display(Name = "Назва")]
     public string ClubName { get; set; }
-    [Display(Name = "Похододження")]
+    [Display(Name = "Походженя")]
     public string ClubOrigin { get; set; }
     [Display(Name = "Кількість гравців")]
     public int ClubPlayerQuantity { get; set; }
     [Display(Name = "Тренер")]
     public string ClubCoachName { get; set; }
-    [Display(Name = "Дата заснування клубу")]
+    [Display(Name = "Дата заснування")]
     public DateTime ClubEstablishmentDate { get; set; }
 
     public virtual ICollection<Match> MatchGuestClubs { get; } = new List<Match>();
@@ -24,5 +24,5 @@ public partial class Club
 
     public virtual ICollection<Player> Players { get; } = new List<Player>();
 
-    public virtual ICollection<Stadium> Stadium { get; } = new List<Stadium>();
+    public virtual ICollection<Stadium> Stadiums { get; } = new List<Stadium>();
 }

@@ -132,26 +132,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Stadia/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGlhXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Stadia/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGlhXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Stadia/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGlhXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Stadia/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGlhXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Stadia/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGlhXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/boda2/source/repos/FootBallWebLaba1/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

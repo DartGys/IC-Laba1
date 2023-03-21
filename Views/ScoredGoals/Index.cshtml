@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Player.PlayerName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ScoredGoalId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ScoredGoalId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ScoredGoalId">Delete</a>
+                    <div> <a asp-action="Details" asp-route-id="@item.ScoredGoalId">Інфо гравця</a> </div>
+                @*<a asp-action="Edit" asp-route-id="@item.ScoredGoalId">Редагувати</a>*@ |
+                <a asp-action="Delete" asp-route-id="@item.ScoredGoalId">Видалити</a>
             </td>
         </tr>
 }

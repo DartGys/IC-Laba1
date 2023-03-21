@@ -23,9 +23,11 @@ public partial class FootBallBdContext : DbContext
 
     public virtual DbSet<Player> Players { get; set; }
 
+    public virtual DbSet<Position> Positions { get; set; }
+
     public virtual DbSet<ScoredGoal> ScoredGoals { get; set; }
 
-    public virtual DbSet<Stadium> Stadia { get; set; }
+    public virtual DbSet<Stadium> Stadiums { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -96,15 +98,28 @@ public partial class FootBallBdContext : DbContext
             entity.Property(e => e.PlayerName)
                 .IsRequired()
                 .HasMaxLength(40);
-            entity.Property(e => e.PlayerPosition)
-                .IsRequired()
-                .HasMaxLength(20);
             entity.Property(e => e.PlayerSalary).HasColumnType("money");
 
             entity.HasOne(d => d.Club).WithMany(p => p.Players)
                 .HasForeignKey(d => d.ClubId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Player_Club");
+
+            entity.HasOne(d => d.Position).WithMany(p => p.Players)
+                .HasForeignKey(d => d.PositionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Player_Position");
+        });
+
+        modelBuilder.Entity<Position>(entity =>
+        {
+            entity.ToTable("Position");
+
+            entity.Property(e => e.PositionName)
+                .IsRequired()
+                .HasMaxLength(30)
+                .IsFixedLength()
+                .HasColumnName("Position");
         });
 
         modelBuilder.Entity<ScoredGoal>(entity =>
@@ -131,7 +146,7 @@ public partial class FootBallBdContext : DbContext
                 .IsRequired()
                 .HasMaxLength(50);
 
-            entity.HasOne(d => d.Club).WithMany(p => p.Stadium)
+            entity.HasOne(d => d.Club).WithMany(p => p.Stadiums)
                 .HasForeignKey(d => d.ClubId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Stadium_Club");

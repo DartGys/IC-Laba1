@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootBallWebLaba1.Models;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace FootBallWebLaba1.Controllers
 {
@@ -48,8 +50,10 @@ namespace FootBallWebLaba1.Controllers
                 return NotFound();
             }
 
-            return RedirectToAction("Index", "ScoredGoals", new { id = match.MatchId}); ;
+            return RedirectToAction("Index", "ScoredGoals", new { id = match.MatchId});
         }
+
+
 
         // GET: Matches/Create
         public IActionResult Create(int championshipId)
@@ -57,7 +61,7 @@ namespace FootBallWebLaba1.Controllers
             //ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry");
             ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName");
             ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName");
-            ViewData["StaidumId"] = new SelectList(_context.Stadia, "StadiumId", "StadiumLocation");
+            //ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation");
             ViewBag.ChampionshipId = championshipId;
             ViewBag.ChampionshipName = _context.Championships.Where(c => c.ChampionshipId == championshipId).FirstOrDefault().ChampionshipName;
             return View();
@@ -71,18 +75,86 @@ namespace FootBallWebLaba1.Controllers
         public async Task<IActionResult> Create(int championshipId,[Bind("MatchId,MatchDate,MatchDuration,StaidumId,HostClubId,GuestClubId,ChampionshipId")] Match match)
         {
             match.ChampionshipId = championshipId;
+            var stadium = await _context.Stadiums.FirstAsync(s => s.ClubId == match.HostClubId);
+            match.StaidumId = stadium.StadiumId;
             if (ModelState.IsValid)
             {
+                if(match.HostClubId == match.GuestClubId)
+                {
+                    ModelState.AddModelError("MatchDuration", "В матчі беруть участь дві різні команди");
+                    ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+                    ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+                    ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+                    ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+                    ViewBag.ChampionshipId = championshipId;
+                    return View(match);
+                }
+
+                var guestClubPlayers = await _context.Players.FirstOrDefaultAsync(g => g.ClubId == match.GuestClubId);
+                var hostClubPlayers = await _context.Players.FirstOrDefaultAsync(g => g.ClubId == match.HostClubId);
+
+
+                if(hostClubPlayers == null || hostClubPlayers == null)
+                {
+                    ModelState.AddModelError("MatchDuration", "Зазначені команди не мають жодного гравця в складі");
+                    ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+                    ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+                    ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+                    ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+                    ViewBag.ChampionshipId = championshipId;
+                    return View(match);
+                }
+
+                var guestClub = await _context.Clubs.FirstOrDefaultAsync(g => g.ClubId == match.GuestClubId);
+                var hostClub = await _context.Clubs.FirstOrDefaultAsync(g => g.ClubId == match.HostClubId);
+
+                DateTime dateTime = DateTime.Now;
+
+                if (guestClub.ClubEstablishmentDate > match.MatchDate || hostClub.ClubEstablishmentDate > match.MatchDate)
+                {
+                    ModelState.AddModelError("MatchDate", "Дата проведення матчу не може передувати даті створення команд");
+                    ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+                    ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+                    ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+                    ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+                    ViewBag.ChampionshipId = championshipId;
+                    return View(match);
+                }
+
+                if(match.MatchDate > dateTime)
+                {
+                    ModelState.AddModelError("MatchDate", "Дата проведення матчу не може бути назначена на майбутнє");
+                    ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+                    ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+                    ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+                    ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+                    ViewBag.ChampionshipId = championshipId;
+                    return View(match);
+                }    
+
+                var checkAnotherChamp = await _context.Matches.FirstOrDefaultAsync(c => c.ChampionshipId != match.ChampionshipId && (c.HostClubId == match.HostClubId || c.GuestClubId == match.HostClubId || c.HostClubId == match.GuestClubId || c.GuestClubId == match.GuestClubId));
+                    
+                if(checkAnotherChamp != null)
+                {
+                    ModelState.AddModelError("MatchDuration", "Вказана команда уже бере участь в іншому чемпіонаті");
+                    ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+                    ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+                    ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+                    ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+                    ViewBag.ChampionshipId = championshipId;
+                    return View(match);
+                }
+
                 _context.Add(match);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
                 return RedirectToAction("Index", "Matches", new { id = championshipId, name = _context.Championships.Where(c => c.ChampionshipId == championshipId).FirstOrDefault().ChampionshipName});
             }
-            //ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
-            //ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName", match.GuestClubId);
-            //ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName", match.HostClubId);
-            //ViewData["StaidumId"] = new SelectList(_context.Stadia, "StadiumId", "StadiumLocation", match.StaidumId);
-            return RedirectToAction("Index", "Matches", new { id = championshipId, name = _context.Championships.Where(c => c.ChampionshipId == championshipId).FirstOrDefault().ChampionshipName });
+            ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+            ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+            ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+            ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+            return View(match);
         }
 
         // GET: Matches/Edit/5
@@ -98,10 +170,10 @@ namespace FootBallWebLaba1.Controllers
             {
                 return NotFound();
             }
-            ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
-            ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName", match.GuestClubId);
-            ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName", match.HostClubId);
-            ViewData["StaidumId"] = new SelectList(_context.Stadia, "StadiumId", "StadiumLocation", match.StaidumId);
+            //ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+            ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+            ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+            ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
             return View(match);
         }
 
@@ -119,6 +191,16 @@ namespace FootBallWebLaba1.Controllers
 
             if (ModelState.IsValid)
             {
+                if (match.HostClubId == match.GuestClubId)
+                {
+                    ModelState.AddModelError("MatchDuration", "В матчі беруть участь дві різні команди");
+                    ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+                    ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+                    ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+                    ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
+                    ViewBag.ChampionshipId = match.ChampionshipId;
+                    return View(match);
+                }
                 try
                 {
                     _context.Update(match);
@@ -137,10 +219,10 @@ namespace FootBallWebLaba1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
-            ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName", match.GuestClubId);
-            ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubCoachName", match.HostClubId);
-            ViewData["StaidumId"] = new SelectList(_context.Stadia, "StadiumId", "StadiumLocation", match.StaidumId);
+            //ViewData["ChampionshipId"] = new SelectList(_context.Championships, "ChampionshipId", "ChampionshipCountry", match.ChampionshipId);
+            ViewData["GuestClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.GuestClubId);
+            ViewData["HostClubId"] = new SelectList(_context.Clubs, "ClubId", "ClubName", match.HostClubId);
+            ViewData["StaidumId"] = new SelectList(_context.Stadiums, "StadiumId", "StadiumLocation", match.StaidumId);
             return View(match);
         }
 
@@ -153,7 +235,6 @@ namespace FootBallWebLaba1.Controllers
             }
 
             var match = await _context.Matches
-                .Include(m => m.Championship)
                 .Include(m => m.GuestClub)
                 .Include(m => m.HostClub)
                 .Include(m => m.Stadium)

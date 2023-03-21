@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<FootBallWebLaba1.Models.Player>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "IndexPlayers";
 }
 
-<h1>Список усіх гравців</h1>
+<h1>Гравець команди @ViewBag.ClubName</h1>
 
-@*<p>
-    <a asp-action="Create">Додати гравця</a>
-</p>*@
+<p>
+    @Html.ActionLink("Додати нового гравця", "Create", new {clubId = ViewBag.ClubId})
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -54,10 +54,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Club.ClubName)
             </td>
-              
             <td>
-                    <div> <a asp-action="Details" asp-route-id="@item.PlayerId">Команда</a> </div>
-                <a asp-action="Edit" asp-route-id="@item.PlayerId">Редагувати</a> |
+                <a asp-action="Edit" asp-route-id="@item.PlayerId">Редагувати</a> 
+                <a asp-action="Delete" asp-route-id="@item.PlayerId">Видалити</a>
             </td>
         </tr>
 }

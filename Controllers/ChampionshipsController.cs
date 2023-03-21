@@ -57,6 +57,13 @@ namespace FootBallWebLaba1.Controllers
         {
             if (ModelState.IsValid)
             {
+                var championsips = await _context.Championships.FirstOrDefaultAsync(c => c.ChampionshipName == championship.ChampionshipName);
+                if(championsips != null)
+                {
+                    ModelState.AddModelError("ChampionshipName", "Чемпіонат з такою назвою уже існіє");
+                    return View(championship);
+                }
+
                 _context.Add(championship);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,6 +101,14 @@ namespace FootBallWebLaba1.Controllers
 
             if (ModelState.IsValid)
             {
+
+                var championsips = await _context.Championships.FirstOrDefaultAsync(c => c.ChampionshipName == championship.ChampionshipName && c.ChampionshipId != championship.ChampionshipId);
+                if (championsips != null)
+                {
+                    ModelState.AddModelError("ChampionshipName", "Чемпіонат з такою назвою уже існіє");
+                    return View(championship);
+                }
+
                 try
                 {
                     _context.Update(championship);
@@ -143,6 +158,19 @@ namespace FootBallWebLaba1.Controllers
                 return Problem("Entity set 'FootBallBdContext.Championships'  is null.");
             }
             var championship = await _context.Championships.FindAsync(id);
+
+            var matches = await _context.Matches
+                .Where(m => m.ChampionshipId == id)
+                .Include(m => m.ScoredGoals)
+                .FirstOrDefaultAsync();
+            if(matches != null)
+            {
+                foreach (var s in matches.ScoredGoals)
+                    _context.Remove(s);
+
+                _context.Matches.Remove(matches);
+            }
+
             if (championship != null)
             {
                 _context.Championships.Remove(championship);

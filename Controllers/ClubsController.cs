@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootBallWebLaba1.Models;
+using System.Numerics;
 
 namespace FootBallWebLaba1.Controllers
 {
@@ -42,6 +43,23 @@ namespace FootBallWebLaba1.Controllers
             return View(club);
         }
 
+        public async Task<IActionResult> PlayersList(int? id)
+        {
+            if (id == null || _context.Clubs == null)
+            {
+                return NotFound();
+            }
+
+            var club = await _context.Clubs
+                .FirstOrDefaultAsync(m => m.ClubId == id);
+            if (club == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("IndexPlayers", "Players", new { id = club.ClubId, name = club.ClubId });
+        }
+
         // GET: Clubs/Create
         public IActionResult Create()
         {
@@ -55,11 +73,36 @@ namespace FootBallWebLaba1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ClubId,ClubName,ClubOrigin,ClubPlayerQuantity,ClubCoachName,ClubEstablishmentDate")] Club club)
         {
+            club.ClubPlayerQuantity = 0;
             if (ModelState.IsValid)
             {
+                var clubName = _context.Clubs.FirstOrDefault(c => c.ClubName == club.ClubName);
+                var clubCoach = _context.Clubs.FirstOrDefault(c => c.ClubCoachName == club.ClubCoachName);
+
+                DateTime curDate = DateTime.Now;
+                DateTime clubDate = club.ClubEstablishmentDate;
+
+                if(clubDate > curDate)
+                {
+                    ModelState.AddModelError("ClubEstablishmentDate", "Дата створення клубу не відповідає дійсності");
+                    return View(club);
+                }
+
+                if(clubCoach != null)
+                {
+                    ModelState.AddModelError("ClubCoachName", "Цей тренер уже тренує іншу команду");
+                    return View(club);
+                }
+
+                if (clubName != null)
+                {
+                    ModelState.AddModelError("ClubName", "Команда з такою назвою уже існує");
+                    return View(club);
+                }
+
                 _context.Add(club);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Stadiums", new { clubId = club.ClubId});
             }
             return View(club);
         }
@@ -94,6 +137,22 @@ namespace FootBallWebLaba1.Controllers
 
             if (ModelState.IsValid)
             {
+
+                var clubName = _context.Clubs.FirstOrDefault(c => c.ClubName == club.ClubName && c.ClubId != club.ClubId);
+                var clubCoach = _context.Clubs.FirstOrDefault(c => c.ClubCoachName == club.ClubCoachName && c.ClubId != club.ClubId);
+
+                if (clubCoach != null)
+                {
+                    ModelState.AddModelError("ClubCoachName", "Цей тренер уже тренує іншу команду");
+                    return View(club);
+                }
+
+                if (clubName != null)
+                {
+                    ModelState.AddModelError("ClubName", "Команда з такою назвою уже існує");
+                    return View(club);
+                }
+
                 try
                 {
                     _context.Update(club);
@@ -142,13 +201,39 @@ namespace FootBallWebLaba1.Controllers
             {
                 return Problem("Entity set 'FootBallBdContext.Clubs'  is null.");
             }
-            var club = await _context.Clubs.FindAsync(id);
+
+            var club = await _context.Clubs
+                .Include(c => c.Players)
+                .Include(c => c.Stadiums)
+                .FirstOrDefaultAsync(m => m.ClubId == id);
+
+            var match = await _context.Matches
+                .Where(m => m.HostClubId == id || m.GuestClubId == id)
+                .Include(m => m.ScoredGoals)
+                .FirstOrDefaultAsync();
+
+
+            if (match != null)
+            {
+                foreach (var s in match.ScoredGoals)
+                    _context.Remove(s);
+                _context.Matches.Remove(match);
+            }
+
+
             if (club != null)
             {
+                foreach (var s in club.Stadiums)
+                    _context.Remove(s);
+
+                foreach (var p in club.Players)
+                    _context.Remove(p);
+
                 _context.Clubs.Remove(club);
             }
-            
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

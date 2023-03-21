@@ -41,12 +41,14 @@ namespace FootBallWebLaba1.Controllers
                 .Include(s => s.Match)
                 .Include(s => s.Player)
                 .FirstOrDefaultAsync(m => m.ScoredGoalId == id);
+
+
             if (scoredGoal == null)
             {
                 return NotFound();
             }
 
-            return View(scoredGoal);
+            return RedirectToAction("Details", "Players", new { id = scoredGoal.PlayerId });
         }
 
         // GET: ScoredGoals/Create
@@ -68,6 +70,16 @@ namespace FootBallWebLaba1.Controllers
             scoredGoal.MatchId = MatchId;
             if (ModelState.IsValid)
             {
+                var match = await _context.Matches.FirstOrDefaultAsync(m => m.MatchId == MatchId);
+
+                if(match.MatchDuration < scoredGoal.ScoredMinute || scoredGoal.ScoredMinute < 1)
+                {
+                    ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "PlayerName");
+                    ModelState.AddModelError("ScoredMinute", "Вказана хвилина виходить за рамки тривалості матчу");
+                    ViewBag.MatchId = MatchId;
+                    return View(scoredGoal);
+                }
+
                 _context.Add(scoredGoal);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
@@ -163,13 +175,14 @@ namespace FootBallWebLaba1.Controllers
                 return Problem("Entity set 'FootBallBdContext.ScoredGoals'  is null.");
             }
             var scoredGoal = await _context.ScoredGoals.FindAsync(id);
+            int MatchId = scoredGoal.MatchId;
             if (scoredGoal != null)
             {
                 _context.ScoredGoals.Remove(scoredGoal);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "ScoredGoals", new { id = MatchId, name = _context.Matches.Where(c => c.MatchId == MatchId).FirstOrDefault().MatchDate });
         }
 
         private bool ScoredGoalExists(int id)
