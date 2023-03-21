@@ -7,7 +7,7 @@
 <h1>Чемпіонати</h1>
 
 <p>
-    <a asp-action="Create">Додати новий чемпіонат</a>
+    <a asp-action="Create" class="btn btn-success mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px">Додати новий чемпіонат</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.ChampionshipClubQuantity)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.ChampionshipId">Матчі</a>   <div>    
-                <a asp-action="Edit" asp-route-id="@item.ChampionshipId">Редагувати</a> |
-                <a asp-action="Delete" asp-route-id="@item.ChampionshipId">Видалити</a> 
+                <a asp-action="Details"  class="btn btn-primary mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px"  asp-route-id="@item.ChampionshipId">Матчі</a>   <div>
+                        <a asp-action="Edit" class="btn btn-info mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.ChampionshipId">Редагувати</a> 
+                <a asp-action="Delete" class="btn btn-danger mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px"  asp-route-id="@item.ChampionshipId">Видалити</a> 
                 </div>
 
 

@@ -9,137 +9,165 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FootBallWebLaba1
 build_property.RootNamespace = FootBallWebLaba1
-build_property.ProjectDir = C:\Users\boda2\source\repos\FootBallWebLaba1\
+build_property.ProjectDir = C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
-build_property.MSBuildProjectDirectory = C:\Users\boda2\source\repos\FootBallWebLaba1
+build_property.MSBuildProjectDirectory = C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Championships/Create.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Championships/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbXBpb25zaGlwc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Championships/Delete.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Championships/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbXBpb25zaGlwc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Championships/Details.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Championships/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbXBpb25zaGlwc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Championships/Edit.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Championships/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbXBpb25zaGlwc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Championships/Index.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Championships/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbXBpb25zaGlwc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Clubs/Create.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Clubs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2x1YnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Clubs/Delete.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Clubs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2x1YnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Clubs/Details.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Clubs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2x1YnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Clubs/Edit.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Clubs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2x1YnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Clubs/Index.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Clubs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2x1YnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Home/Index.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Home/Privacy.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Matches/Create.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Matches/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Matches/Delete.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Matches/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Matches/Details.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Matches/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Matches/Edit.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Matches/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Matches/Index.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Matches/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Players/Create.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Players/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Players/Delete.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Players/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Players/Details.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Players/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Players/Edit.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Players/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Players/Index.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Players/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/ScoredGoals/Create.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Players/IndexPlayers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxheWVyc1xJbmRleFBsYXllcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/ScoredGoals/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NvcmVkR29hbHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/ScoredGoals/Delete.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/ScoredGoals/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NvcmVkR29hbHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/ScoredGoals/Details.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/ScoredGoals/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NvcmVkR29hbHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/ScoredGoals/Edit.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/ScoredGoals/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NvcmVkR29hbHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/ScoredGoals/Index.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/ScoredGoals/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2NvcmVkR29hbHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Shared/Error.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/_ViewImports.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Stadiums/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGl1bXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Stadiums/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGl1bXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Stadiums/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGl1bXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Stadiums/DetailsStadium.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGl1bXNcRGV0YWlsc1N0YWRpdW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Stadiums/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGl1bXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Stadiums/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZGl1bXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/_ViewStart.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/boda2/source/repos/FootBallWebLaba1/Views/Shared/_Layout.cshtml]
+[C:/Users/boda2/Downloads/IC-Laba1-main/IC-Laba1-main/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-1zrsztoq4g

@@ -13,6 +13,8 @@ public partial class Stadium
     [Range(1000,50000, ErrorMessage = "Стадіон може вміщувати від 1000 до 50000 вболівальників")]
     public int StadiumCapacity { get; set; }
     [Display(Name = "Дата заснування")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
     public DateTime StadiumEstablismentDate { get; set; }
 
     public int ClubId { get; set; }

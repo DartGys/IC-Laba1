@@ -7,7 +7,9 @@
 <h1>Голи в матчі</h1>
 
 <p>
-    @Html.ActionLink("Додати новий гол","Create", new {matchId = ViewBag.MatchId})
+    @*@Html.ActionLink("Додати новий гол","Create", new {matchId = ViewBag.MatchId})*@
+    <a href="@Url.Action("Create", new {matchId = ViewBag.MatchId})"> <input type="button" value="Додати новий гол" asp-action="Details" class="btn btn-success mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" /></a>
+    
 </p>
 <table class="table">
     <thead>
@@ -37,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.Player.PlayerName)
             </td>
             <td>
-                    <div> <a asp-action="Details" asp-route-id="@item.ScoredGoalId">Інфо гравця</a> </div>
-                @*<a asp-action="Edit" asp-route-id="@item.ScoredGoalId">Редагувати</a>*@ |
-                <a asp-action="Delete" asp-route-id="@item.ScoredGoalId">Видалити</a>
+                    <div> <a asp-action="Details" class="btn btn-primary mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.ScoredGoalId">Інфо гравця</a> </div>
+                @*<a asp-action="Edit" asp-route-id="@item.ScoredGoalId">Редагувати</a>*@ 
+                    <a asp-action="Delete"  class="btn btn-danger mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.ScoredGoalId">Видалити</a>
             </td>
         </tr>
 }

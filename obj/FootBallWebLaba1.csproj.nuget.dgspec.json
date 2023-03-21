@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\FootBallWebLaba1.csproj": {}
+    "C:\\Users\\boda2\\Downloads\\IC-Laba1-main\\IC-Laba1-main\\FootBallWebLaba1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\FootBallWebLaba1.csproj": {
+    "C:\\Users\\boda2\\Downloads\\IC-Laba1-main\\IC-Laba1-main\\FootBallWebLaba1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\FootBallWebLaba1.csproj",
+        "projectUniqueName": "C:\\Users\\boda2\\Downloads\\IC-Laba1-main\\IC-Laba1-main\\FootBallWebLaba1.csproj",
         "projectName": "FootBallWebLaba1",
-        "projectPath": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\FootBallWebLaba1.csproj",
+        "projectPath": "C:\\Users\\boda2\\Downloads\\IC-Laba1-main\\IC-Laba1-main\\FootBallWebLaba1.csproj",
         "packagesPath": "C:\\Users\\boda2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\obj\\",
+        "outputPath": "C:\\Users\\boda2\\Downloads\\IC-Laba1-main\\IC-Laba1-main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\boda2\\AppData\\Roaming\\NuGet\\NuGet.Config",

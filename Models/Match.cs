@@ -8,6 +8,8 @@ public partial class Match
 {
     public int MatchId { get; set; }
     [Display(Name = "Дата матчу")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
     public DateTime MatchDate { get; set; }
     [Display(Name = "Тривалість")]
     [Range(90,125, ErrorMessage = "Тривалість матча від 90 до 120 хвилин + 5 хвилин додаткового часу")]

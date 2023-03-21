@@ -55,8 +55,8 @@
                 @Html.DisplayFor(modelItem => item.Club.ClubName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PlayerId">Редагувати</a> 
-                <a asp-action="Delete" asp-route-id="@item.PlayerId">Видалити</a>
+                <a asp-action="Edit"  class="btn btn-info mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.PlayerId">Редагувати</a> 
+                    <a asp-action="Delete" class="btn btn-danger mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.PlayerId">Видалити</a>
             </td>
         </tr>
 }

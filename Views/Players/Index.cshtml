@@ -56,8 +56,8 @@
             </td>
               
             <td>
-                    <div> <a asp-action="Details" asp-route-id="@item.PlayerId">Команда</a> </div>
-                <a asp-action="Edit" asp-route-id="@item.PlayerId">Редагувати</a> |
+                    <a asp-action="Details"  class="btn btn-primary mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.PlayerId">Команда</a>
+                    <a asp-action="Edit" class="btn btn-info mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" asp-route-id="@item.PlayerId">Редагувати</a> 
             </td>
         </tr>
 }

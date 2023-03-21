@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cYY/ujLzf8DmiAfkuDse7dfg4hqSMwHgfObI/TXRdoeKWemGgRhBNHmqkn+mE+7OiFJvVpw+yprpdHYxPRTVng==",
+  "dgSpecHash": "WWQ6yxu0aQGD3rKGHwHa6Zk16PxMFeVggZ+/UKC4sGzG3Tkg9nnL3sG4R+fjcDOq6/GFLVmkrIg4zzsNi4usDA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\boda2\\source\\repos\\FootBallWebLaba1\\FootBallWebLaba1.csproj",
+  "projectFilePath": "C:\\Users\\boda2\\Downloads\\IC-Laba1-main\\IC-Laba1-main\\FootBallWebLaba1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\boda2\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\boda2\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

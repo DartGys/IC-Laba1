@@ -18,6 +18,8 @@ public partial class Player
     [Range(100,300000000, ErrorMessage = "Запрлата варіюється від 100 до 300.000.000")]
     public decimal PlayerSalary { get; set; }
     [Display(Name = "Рік народження")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
     public DateTime PlayerBirthDate { get; set; }
     [Display(Name = "Команда")]
     public int ClubId { get; set; }

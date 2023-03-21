@@ -16,6 +16,8 @@ public partial class Club
     [Display(Name = "Тренер")]
     public string ClubCoachName { get; set; }
     [Display(Name = "Дата заснування")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
     public DateTime ClubEstablishmentDate { get; set; }
 
     public virtual ICollection<Match> MatchGuestClubs { get; } = new List<Match>();

@@ -6,7 +6,7 @@
 
 <h1>Додавання матчу до чемпіоната @ViewBag.ChampionshipName</h1>
 
-<h4>Match</h4>
+<h4></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -38,14 +38,14 @@
             <input type="hidden" value="@ViewBag.ChampionshipId" name="ChampionshipId" />
  
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Створити" class="btn btn-success mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-primary mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px">Назад до списку</a>
 </div>
 
 @section Scripts {
