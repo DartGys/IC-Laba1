@@ -55,7 +55,10 @@ namespace FootBallWebLaba1.Controllers
         public IActionResult Create(int MatchId)
         {
             //ViewData["MatchId"] = new SelectList(_context.Matches, "MatchId", "MatchId");
-            ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "PlayerName");
+            int hostClubId = _context.Matches.FirstOrDefault(m => m.MatchId == MatchId).HostClubId;
+            int guestClubId = _context.Matches.FirstOrDefault(m => m.MatchId == MatchId).GuestClubId;
+            var player = _context.Players.Where(p => p.ClubId == hostClubId).Union(_context.Players.Where(p => p.ClubId == guestClubId));
+            ViewData["PlayerId"] = new SelectList(player, "PlayerId", "PlayerName");
             ViewBag.MatchId = MatchId;
             return View();
         }
@@ -74,7 +77,9 @@ namespace FootBallWebLaba1.Controllers
 
                 if(match.MatchDuration < scoredGoal.ScoredMinute || scoredGoal.ScoredMinute < 1)
                 {
-                    ViewData["PlayerId"] = new SelectList(_context.Players, "PlayerId", "PlayerName");
+                    int hostClubId = _context.Matches.FirstOrDefault(m => m.MatchId == MatchId).HostClubId;
+                    int guestClubId = _context.Matches.FirstOrDefault(m => m.MatchId == MatchId).GuestClubId;
+                    ViewData["PlayerId"] = new SelectList(_context.Players.Where(p => p.ClubId == hostClubId && p.ClubId == guestClubId), "PlayerId", "PlayerName");
                     ModelState.AddModelError("ScoredMinute", "Вказана хвилина виходить за рамки тривалості матчу");
                     ViewBag.MatchId = MatchId;
                     return View(scoredGoal);

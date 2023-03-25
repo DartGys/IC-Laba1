@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootBallWebLaba1.Models;
+using ClosedXML.Excel;
+using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -270,5 +272,125 @@ namespace FootBallWebLaba1.Controllers
         {
           return _context.Matches.Any(e => e.MatchId == id);
         }
+
+
+
+        public ActionResult ExportMatchesToExcel()
+        {
+            using (XLWorkbook workbook = new XLWorkbook())
+            {
+                // Отримати дані з бази даних
+                var matches = _context.Matches
+                    .Include(m => m.HostClub)
+                    .Include(m => m.GuestClub)
+                    .Include(m => m.ScoredGoals)
+                        .ThenInclude(sg => sg.Player.Position)
+                    .Include(m => m.Stadium)
+                    .ToList();
+
+                // Створити новий Excel 
+                var worksheet = workbook.Worksheets.Add("Matches");
+
+                // Додати заголовки стовпців
+                worksheet.Cell(1, 1).Value = "MatchId";
+                worksheet.Cell(1, 2).Value = "Команда хазяїв";
+                worksheet.Cell(1, 3).Value = "Команда гостей";
+                worksheet.Cell(1, 4).Value = "Забиті голи";
+                worksheet.Cell(1, 5).Value = "Гравець";
+                worksheet.Cell(1, 6).Value = "Позиція гравця";
+                worksheet.Cell(1, 7).Value = "Локація";
+
+                // Додати дані з бази даних
+                for (int i = 0; i < matches.Count; i++)
+                {
+                    var match = matches[i];
+                    worksheet.Cell(i + 2, 1).Value = match.MatchId;
+                    worksheet.Cell(i + 2, 2).Value = match.HostClub.ClubName;
+                    worksheet.Cell(i + 2, 3).Value = match.GuestClub.ClubName;
+                    worksheet.Cell(i + 2, 7).Value = match.Stadium.StadiumLocation;
+                    int row = i + 2;
+                    foreach (var s in match.ScoredGoals)
+                    {
+                        worksheet.Cell(row, 4).Value = string.Join(",", match.ScoredGoals.Select(sg => sg.ScoredMinute));
+                        worksheet.Cell(row, 5).Value = string.Join(",", match.ScoredGoals.Select(sg => sg.Player.PlayerName));
+                        worksheet.Cell(row, 6).Value = string.Join(",", match.ScoredGoals.Select(sg => sg.Player.Position.PositionName));
+                        
+                    }
+                }
+
+                // Зберегти файл Excel
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    stream.Flush();
+                    return new FileContentResult(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                    {
+                        FileDownloadName = $"mathes{DateTime.UtcNow.ToShortDateString()}.xlsx"
+                    };
+                }
+            }
+        }
+
+        public async Task<IActionResult> ImportMatchesFromExcel(IFormFile fileExel)
+        {
+            if (fileExel != null && fileExel.Length > 0)
+            {
+                using (var stream = fileExel.OpenReadStream())
+                {
+                    using (XLWorkbook workbook = new XLWorkbook(stream))
+                    {
+                        var worksheet = workbook.Worksheet(1);
+                        var row = 2;
+                        var matches = new List<Match>();
+                        while (!worksheet.Cell(row, 1).IsEmpty())
+                        {
+                            var match = new Match();
+                            match.HostClub = new Club();
+                            match.GuestClub = new Club();
+                            //match.ScoredGoals = new List<ScoredGoal>();
+                            match.Stadium = new Stadium();
+
+                            // Отримати дані з рядка
+                            match.MatchId = worksheet.Cell(row, 1).GetValue<int>();
+                            match.HostClub.ClubName = worksheet.Cell(row, 2).GetValue<string>();
+                            match.GuestClub.ClubName = worksheet.Cell(row, 3).GetValue<string>();
+                            var scoredMinutes = worksheet.Cell(row, 4).GetValue<string>();
+                            var playerNames = worksheet.Cell(row, 5).GetValue<string>();
+                            var positionNames = worksheet.Cell(row, 6).GetValue<string>();
+                            match.Stadium.StadiumLocation = worksheet.Cell(row, 7).GetValue<string>();
+
+                            // Розділити дані про забиті голи на масиви
+                            var scoredMinutesArray = scoredMinutes.Split(',');
+                            var playerNamesArray = playerNames.Split(',');
+                            var positionNamesArray = positionNames.Split(',');
+
+                            // Додати дані про голи до матчу
+                            for (int i = 0; i < scoredMinutesArray.Length; i++)
+                            {
+                                var scoredGoal = new ScoredGoal();
+                                scoredGoal.MatchId = match.MatchId;
+                                scoredGoal.ScoredMinute = Convert.ToInt32(scoredMinutesArray[i]);
+                                scoredGoal.Player = new Player();
+                                scoredGoal.Player.PlayerName = playerNamesArray[i];
+                                scoredGoal.Player.Position = new Position();
+                                scoredGoal.Player.Position.PositionName = positionNamesArray[i];
+                                match.ScoredGoals.Add(scoredGoal);
+                                
+                            }
+
+                            matches.Add(match);
+                            row++;
+                        }
+
+                        // Зберегти дані в базі даних
+                        await _context.Matches.AddRangeAsync(matches);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

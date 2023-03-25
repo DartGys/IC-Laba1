@@ -48,3 +48,29 @@
 }
     </tbody>
 </table>
+
+<div class="container">
+    <div id="chart2"></div>
+</div>
+@section scripts
+    {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart()
+        {
+            $.get('api/Chart/JsonDataChamp', function (JsonDataChamp) {
+                data = google.visualization.arrayToDataTable(JsonDataChamp, false);
+                var option = {
+                    title: "Співідношення кількості матчів та чемпіонатів",
+                    width: 400,
+                    height: 200
+                };
+                chart = new google.visualization.BarChart(document.getElementById('chart2'));
+                chart.draw(data, option);
+            })
+        }
+    </script>
+    }

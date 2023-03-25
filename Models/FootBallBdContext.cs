@@ -117,8 +117,7 @@ public partial class FootBallBdContext : DbContext
 
             entity.Property(e => e.PositionName)
                 .IsRequired()
-                .HasMaxLength(30)
-                .IsFixedLength()
+                .HasMaxLength(20)
                 .HasColumnName("Position");
         });
 

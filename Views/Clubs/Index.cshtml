@@ -6,6 +6,33 @@
 
 <h1>Команди</h1>
 
+<div>
+    <h3>Оберіть файл для завантаження</h3>
+    @using (Html.BeginForm("ImportFromExcel", "Clubs", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-exel" }))
+    {
+        <div>
+            Завантажити Exel-файл:
+            <input type="file" name="fileExel" id="fileExel" />
+            <div>
+                <input type="submit" value="Завантажити" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @if(ViewBag.importSuccess != null)
+    {
+        <a>@ViewBag.importSuccess</a>
+    }
+    
+</div>
+
+<div>
+    <h3>Завантажити інформацію про команди</h3>
+    <a asp-action="ExportToExcel" class="btn btn-primary mt-1 mb-1 d-inline-block" style="font-size:12px; padding:5px 7px; border-radius: 10px">Завантажити</a>
+</div>
+
 <p>
     <a asp-action="Create" class="btn btn-success mt-1 mb-1" style="font-size:12px; padding:5px 7px; border-radius: 10px">Додати команду</a>
 </p>
@@ -57,3 +84,31 @@
 }
     </tbody>
 </table>
+
+
+<div class="container">
+    <div id="chart1"></div>
+</div>
+@section scripts
+    {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart()
+        {
+            $.get('api/Chart/JsonDataClub', function(JsonDataClub)
+            {
+                data = google.visualization.arrayToDataTable(JsonDataClub, false);
+                var option = {
+                    title: "Співідношення кількості гравців та команд",
+                    width: 500,
+                    height: 400
+                };
+                chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+            })
+        }
+    </script>
+}

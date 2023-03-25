@@ -1146,3 +1146,10 @@ C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\obj\Debug\net7.0\refint\Foo
 C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\obj\Debug\net7.0\FootBallWebLaba1.pdb
 C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\obj\Debug\net7.0\FootBallWebLaba1.genruntimeconfig.cache
 C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\obj\Debug\net7.0\ref\FootBallWebLaba1.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\ClosedXML.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\DocumentFormat.OpenXml.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\ExcelNumberFormat.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\Irony.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\SixLabors.Fonts.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\System.IO.Packaging.dll
+C:\Users\boda2\Downloads\IC-Laba1-main\IC-Laba1-main\bin\Debug\net7.0\XLParser.dll
